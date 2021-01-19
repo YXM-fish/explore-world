@@ -1,4 +1,4 @@
-
+// const BACKEND_HOST = process.env.StarLink_ERP_BACKEND_HOST
 module.exports = {
     runtimeCompiler: true,
     publicPath: process.env.NODE_ENV === 'production' ? '/public/' : './',
@@ -13,6 +13,7 @@ module.exports = {
     /* 代码保存时进行eslint检测 */
     lintOnSave: true,
 
+    // 配置loader
     chainWebpack: config => {
     // GraphQL Loader
         config.module
@@ -25,7 +26,7 @@ module.exports = {
             .loader('markdown-loader')
             .end()
     },
-    /* webpack-dev-server 相关配置 */
+    // 配置别名
     configureWebpack: {
         resolve: {
             alias: {
@@ -33,8 +34,10 @@ module.exports = {
                 '_c_': '@/components',
                 '_v_': '@/views'
             }
-        }
+        },
+        devtool: 'source-map'
     },
+    /* webpack-dev-server 相关配置 */
     devServer: {
         /* 自动打开浏览器 */
         open: true,
@@ -44,13 +47,23 @@ module.exports = {
         https: false,
         hotOnly: false,
         /* 使用代理 */
-        proxy: {
-            '/api': {
-                /* 目标代理服务器地址 */
-                target: 'http://47.100.47.3/',
-                /* 允许跨域 */
-                changeOrigin: true
-            }
-        }
+        // proxyTable: {
+        //     '/jwt': {
+        //         target: BACKEND_HOST || 'http://localhost:8765',
+        //         // target: 'http://192.168.0.10:8765',
+        //         pathRewrite: {
+        //             '^/jwt': '/jwt'
+        //         }
+        //     },
+        //     '/api': {
+        //         target: BACKEND_HOST || 'http://localhost:8765',
+        //         // target: 'http://192.168.0.105:8765',
+        //         secure: false, // 如果是https接口，需要配置这个参数
+        //         changeOrigin: true, // 是否跨域
+        //         pathRewrite: {
+        //             '^/api': '/api'
+        //         }
+        //     }
+        // }
     }
 }

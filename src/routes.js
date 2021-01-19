@@ -68,6 +68,24 @@ export const menus = [
             icon: 'el-icon-attract'
         },
         component: _dynamicComponent('Test')
+    },
+    {
+        path: 'regexp',
+        name: 'regexp',
+        meta: {
+            title: '正则',
+            icon: 'el-icon-attract'
+        },
+        component: _dynamicComponent('Regexp/index')
+    },
+    {
+        path: 'select',
+        name: 'select',
+        meta: {
+            title: '下拉',
+            icon: 'el-icon-attract'
+        },
+        component: _dynamicComponent('Select/index')
     }
 ]
 

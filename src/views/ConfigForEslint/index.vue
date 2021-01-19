@@ -7,6 +7,7 @@
 <script>
 import VueMarkdown from 'vue-markdown'
 import configForEslint from './configForEslint.js'
+
 const md = require('./configForEslint.md')
 
 export default {

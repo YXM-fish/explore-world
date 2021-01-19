@@ -68,7 +68,6 @@ export default {
         flex: 1;
         overflow-y: auto;
         padding: 20px;
-        background-color: rgb(250, 250, 250);
     }
 }
 </style>

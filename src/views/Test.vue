@@ -3,13 +3,7 @@
         <!-- <img alt="Vue logo" src="./assets/logo.png">
         <HelloWorld msg="Welcome to Your Vue.js App"/>-->
         <div>
-            <button
-                @click="
-                    view(
-                        '//erp-image-dev-1255302958.cos.ap-chengdu.myqcloud.com/6a66ee9345798862b7b0d3bddf0dfa92-1582956906.jpg?imageView2/0/w/180/h/180'
-                    )
-                "
-            >查看图片</button>
+            <button @click="view('//erp-image-dev-1255302958.cos.ap-chengdu.myqcloud.com/6a66ee9345798862b7b0d3bddf0dfa92-1582956906.jpg?imageView2/0/w/180/h/180')">查看图片</button>
             <button @click="view('newteach.pbworks.com/f/ele+newsletter.docx')">查看word文档</button>
             <button @click="
                     view(
@@ -18,11 +12,18 @@
                 ">查看ppt</button>
         </div>
 
-        <el-input v-model="num" v-valid-gold></el-input>
-        <div>{{num}}</div>
-        <div v-fixed-scroll="{scrollNode:'.layout-main',bindNode:'.el-table__body-wrapper'}" style="margin-top:1200px;">
+        <el-input v-model="num" v-valid-gold="{ obj: this, key: 'num' }"></el-input>
+        <div>{{ num }}</div>
+        <el-input v-model="gold.value" v-valid-gold="{ obj: gold, key: 'value' }"></el-input>
+        <div>{{ gold.value }}</div>
+        <el-input v-model="gold.obj.count" v-valid-gold="{ obj: gold.obj, key: 'count' }"></el-input>
+        {{ gold.obj.count }}
+        <div  style="margin-top:1200px;">
             <template>
-                <el-table ref="table" :data="tableData" @expand-change="expandChange" style="width: 100%">
+                <el-table ref="table" v-fixed-scroll="{
+                    scrollNode: '.layout-main',
+                    bindNode: '.el-table__body-wrapper'
+                }" :data="tableData" @sort-change="sortChange" @expand-change="expandChange" style="width: 100%">
                     <el-table-column type="expand">
                         <template slot-scope="props">
                             <el-table :data="props.row.tableData" border style="width: 100%">
@@ -32,7 +33,7 @@
                             </el-table>
                         </template>
                     </el-table-column>
-                    <el-table-column label="商品 ID" prop="id"></el-table-column>
+                    <el-table-column sortable="custome" label="商品 ID" prop="id"></el-table-column>
                     <el-table-column label="商品名称" prop="name"></el-table-column>
                     <el-table-column prop="name" min-width="400">
                         <template slot="header">
@@ -44,7 +45,7 @@
                             <button @click="toggleFold(scope.row)">{{ scope.row.isFold ? '展开' : '收起' }}</button>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="name" min-width="400">
+                    <el-table-column sortable="custome" prop="name" min-width="400">
                         <template slot="header">
                             <div>
                                 <span style="vertical-align:middle;">采购单</span>
@@ -288,13 +289,21 @@
 <script>
 import TTable from '_c_/TTable'
 import popper from '_c_/YuPoper'
+import watermark from '_c_/watermark.vue'
+import gwm from 'gwm'
 
 export default {
     name: 'App',
     data() {
         return {
             self: '.el-table__body-wrapper',
-            num: '0.jjmm',
+            num: null,
+            gold: {
+                value: '0.1mm',
+                obj: {
+                    count: '123.456'
+                }
+            },
             config: {
                 index: {
                     show: true,
@@ -453,7 +462,8 @@ export default {
     },
     components: {
         TTable,
-        popper
+        popper,
+        watermark
     },
     directives: {},
     created() {
@@ -461,8 +471,27 @@ export default {
             t.isFold = true
         })
     },
+    mounted() {
+        gwm.creation({
+            txt: '..王小明 2020-5-29',
+            container: '#app',
+            css: {
+                'z-index': '10000',
+                'pointer-events': 'none'
+            },
+            fontSize: 16,
+            angle: 25,
+            width: 260,
+            height: 260
+        })
+    },
     watch: {},
     methods: {
+        sortChange({ column, prop, order }) {
+            console.log(column, prop, order)
+            // prop: 属性
+            // order: ascending升序，descending降序
+        },
         numChange(v) {
             let newValue = v.toString()
             newValue = v

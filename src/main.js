@@ -6,13 +6,17 @@ Vue.use(VueRouter)
 
 import './index.scss'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import './element-variables.scss'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'small' })
 
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/atom-one-dark.css'
 Vue.use(VueHighlightJS)
+
+// import VueVirtualScroller from 'vue-virtual-scroller'
+// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+// Vue.use(VueVirtualScroller)
 
 import directives from '@/directives'
 Vue.use(directives)

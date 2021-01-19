@@ -1,12 +1,29 @@
 export default {
-    inserted: function(el, binding) {
-        let input = el.querySelector('input')
-        input.addEventListener('input', (e) => {
-            e.target.value = numChange(e.target.value)
-        })
-        input.addEventListener('change', (e) => {
-            e.target.value = numBlur(e.target.value)
-        })
+    bind(el, binding) {
+        const validate = {
+            init: function(param) {
+                this.setInteger(param)
+            },
+            setInteger: function(param) {
+                const input$ = el.getElementsByTagName('input')[0]
+                const funChange = () => {
+                    input$.value = numChange(input$.value)
+                    param.obj[param.key] = input$.value
+                }
+                const funBlur = () => {
+                    input$.value = numBlur(input$.value, param.includeZero)
+                    param.obj[param.key] = input$.value
+                }
+                validate.addEvent(input$, ['input'], funChange)
+                validate.addEvent(input$, ['change'], funBlur)
+            },
+            addEvent(el, eventName, eventFn) {
+                eventName.forEach(name => {
+                    el.addEventListener(eventName, eventFn)
+                })
+            }
+        }
+        validate.init(binding.value)
     }
 }
 
@@ -28,6 +45,15 @@ function numChange(v) {
     }
     return newValue
 }
-function numBlur(v) {
-    return Number(v.replace(/\.$/, ''))
+function numBlur(v, includeZero) {
+    let nv = v.replace(/\.$/, '')
+    if (!includeZero) {
+        return nv
+    } else {
+        if (nv.indexOf('.') === -1) {
+            return nv + '.00'
+        } else {
+            return nv.split('.')[1].length === 1 ? nv + '0' : nv
+        }
+    }
 }
