@@ -113,10 +113,6 @@
 </template>
 
 <script>
-import {
-    OfflinePaymentService,
-    OfflinePaymentUrls
-} from '@/api/purchase/offlinePay'
 // import watermark from './myWatermark.js'
 import watermark from '_c_/watermark.vue'
 import ClipboardJS from 'clipboard'

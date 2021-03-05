@@ -86,6 +86,15 @@ export const menus = [
             icon: 'el-icon-attract'
         },
         component: _dynamicComponent('Select/index')
+    },
+    {
+        path: 'gallery',
+        name: 'gallery',
+        meta: {
+            title: '图片长廊',
+            icon: 'el-icon-attract'
+        },
+        component: _dynamicComponent('ImageGallery/index')
     }
 ]
 
