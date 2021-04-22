@@ -108,6 +108,7 @@
         </page-top-form>
 
         <el-table :data="tableData" :span-method="objectSpanMethod" border style="width: 100%; margin-top: 20px">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="index" width="50"></el-table-column>
             <el-table-column prop="id" label="ID" width="180"></el-table-column>
             <el-table-column prop="name" label="姓名"></el-table-column>
@@ -120,8 +121,16 @@
             </el-table-column>
         </el-table>
 
-        <el-table :data="tableData1" style="width: 100%" row-key="id" border lazy :load="load" :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
-            <el-table-column prop="date" label="日期" width="380"></el-table-column>
+        <el-table ref="tb1" :data="tableData1" style="width: 100%" row-key="id" border lazy @selection-change="handleSelectionChange" :load="load" :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="date" label="日期" width="380">
+                <template slot-scope="scope">
+                    <i v-if="scope.row.hasChildren && !scope.treeNode.expanded && !scope.treeNode.loading" class="el-icon-circle-plus-outline" @click="toggleExpand(scope, scope.row, $event)"></i>
+                    <i v-if="scope.row.hasChildren && scope.treeNode.expanded && !scope.treeNode.loading" class="el-icon-remove-outline" @click="toggleExpand(scope, scope.row, $event)"></i>
+                    <i v-if="scope.row.hasChildren && scope.treeNode.loading" class="el-icon-loading"></i>
+                    <span>{{scope.row.date}}</span>
+                </template>
+            </el-table-column>
             <el-table-column prop="name" label="姓名" width="180"></el-table-column>
             <el-table-column prop="address" label="地址"></el-table-column>
         </el-table>
@@ -330,10 +339,24 @@ export default {
                     }
                 ])
             }, 1000)
+        },
+        handleSelectionChange(val) {
+            console.log(val)
+        },
+        toggleExpand(scope, row, event) {
+            console.log(scope)
+            let cell = event.target.parentElement
+            let icon = cell.querySelector('.el-icon-arrow-right')
+            icon.click()
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+/deep/ .el-table {
+    .el-table__expand-icon {
+        display: none;
+    }
+}
 </style>
