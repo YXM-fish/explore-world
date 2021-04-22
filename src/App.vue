@@ -10,6 +10,6 @@ export default {}
 
 <style scoped>
 .root {
-    height: 100%;
+    height: 100vh;
 }
 </style>

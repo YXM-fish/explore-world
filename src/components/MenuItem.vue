@@ -30,12 +30,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+/deep/ .el-menu.el-menu--inline {
+    background: none;
+}
 .el-menu-item i,
 .el-submenu i {
     color: #ffffff;
 }
-.el-menu .el-menu-item.is-active {
-    background-color: #01ca33 !important;
+.el-menu-item.is-active {
+    background-color: #5597ab;
+}
+.el-menu-item:hover {
+    background: #7aa4b1;
 }
 </style>

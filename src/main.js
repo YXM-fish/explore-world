@@ -5,8 +5,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import './index.scss'
+import '../theme/index.css'
 import ElementUI from 'element-ui'
-import './element-variables.scss'
+// import './element-variables.scss'
 
 Vue.use(ElementUI, { size: 'small' })
 

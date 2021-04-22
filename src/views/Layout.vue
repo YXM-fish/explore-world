@@ -1,25 +1,51 @@
 <template>
-    <div class="layout">
-        <el-menu
-            class="layout-side"
-            background-color="#00b17c"
-            text-color="#ffffff"
-            active-text-color="#fffb00"
-            :default-active="defaultActive"
-            :router="true"
-            :unique-opned="true"
-            @select="handleSelect"
-            @open="handleOpen"
-            @close="handleClose"
-        >
-            <template v-for="(menu, index) in menus">
-                <MenuItem :key="index" :menu="menu"></MenuItem>
-            </template>
-        </el-menu>
-        <div class="layout-main">
-            <router-view></router-view>
+    <el-container>
+        <el-header class="header-nav"></el-header>
+        <el-container>
+            <el-aside class="side-bar">
+                <el-menu
+                    text-color="#ffffff"
+                    active-text-color="#ffffff"
+                    :router="true"
+                    :unique-opned="true"
+                    @select="handleSelect"
+                    @open="handleOpen"
+                    @close="handleClose"
+                >
+                    <template v-for="(menu, index) in menus">
+                        <MenuItem :key="index" :menu="menu"></MenuItem>
+                    </template>
+                </el-menu>
+            </el-aside>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
+        </el-container>
+    </el-container>
+    <!-- <div class="layout">
+        <div class="layout-nav"></div>
+        <div class="layout-body">
+            <div class="layout-sidebar">
+                <el-menu
+                    class="layout-side"
+                    text-color="#ffffff"
+                    active-text-color="#ffffff"
+                    :router="true"
+                    :unique-opned="true"
+                    @select="handleSelect"
+                    @open="handleOpen"
+                    @close="handleClose"
+                >
+                    <template v-for="(menu, index) in menus">
+                        <MenuItem :key="index" :menu="menu"></MenuItem>
+                    </template>
+                </el-menu>
+            </div>
+            <div class="layout-main">
+                <router-view></router-view>
+            </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
@@ -54,20 +80,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    .layout-side {
-        width: 200px;
-        flex: 0 1 200px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    .layout-main {
-        flex: 1;
-        overflow-y: auto;
-        padding: 20px;
-    }
+.header-nav {
+    background-color: #3486a3;
+}
+.side-bar {
+    width: 250px;
+    background-color: #075d7d;
+}
+.el-menu {
+    background: none;
 }
 </style>
