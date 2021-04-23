@@ -18,39 +18,16 @@
                 </el-menu>
             </el-aside>
             <el-main>
-                <router-view></router-view>
+                <RouteContainer></RouteContainer>
             </el-main>
         </el-container>
     </el-container>
-    <!-- <div class="layout">
-        <div class="layout-nav"></div>
-        <div class="layout-body">
-            <div class="layout-sidebar">
-                <el-menu
-                    class="layout-side"
-                    text-color="#ffffff"
-                    active-text-color="#ffffff"
-                    :router="true"
-                    :unique-opned="true"
-                    @select="handleSelect"
-                    @open="handleOpen"
-                    @close="handleClose"
-                >
-                    <template v-for="(menu, index) in menus">
-                        <MenuItem :key="index" :menu="menu"></MenuItem>
-                    </template>
-                </el-menu>
-            </div>
-            <div class="layout-main">
-                <router-view></router-view>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 <script>
 import { menus } from '@/routes'
 import MenuItem from '_c_/MenuItem.vue'
+import RouteContainer from '@/RouteContainer.vue'
 
 export default {
     data() {
@@ -60,7 +37,8 @@ export default {
         }
     },
     components: {
-        MenuItem
+        MenuItem,
+        RouteContainer
     },
     created() {
         this.defaultActive = this.$route.name
@@ -80,11 +58,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-container {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+}
+.el-main {
+    background-color: #f5f6f8;
+    padding: 30px 26px;
+    div:first-child {
+        background-color: white;
+    }
+}
 .header-nav {
     background-color: #3486a3;
 }
 .side-bar {
-    width: 250px;
     background-color: #075d7d;
 }
 .el-menu {

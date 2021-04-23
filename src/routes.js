@@ -1,6 +1,6 @@
 
 var _dynamicComponent = path => require('@/views/' + path + '.vue').default
-const App = () => import('@/App.vue')
+const RouteContainer = () => import('@/RouteContainer.vue')
 
 export const menus = [
     {
@@ -20,7 +20,7 @@ export const menus = [
             title: '布袋人物志',
             icon: 'el-icon-printer'
         },
-        component: App,
+        component: RouteContainer,
         children: [
             {
                 path: 'frontend',
@@ -102,11 +102,11 @@ export const routes = [
     {
         path: '*',
         redirect: '/',
-        component: App
+        component: RouteContainer
     },
     {
         path: '/',
-        component: App,
+        component: RouteContainer,
         redirect: '/layout',
         children: [
             {

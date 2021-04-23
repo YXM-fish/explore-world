@@ -1,12 +1,11 @@
 <template>
-    <div class="form-wraper" :style="{maxHeight: formHeight.substr(0,formHeight.length - 2) > 180  && !collapse ? '180px' : ''}">
+    <div class="form-wraper" :class="{'unexpand': formHeight.substr(0,formHeight.length - 2) > 180  && !collapse}">
         <div ref="form">
             <slot></slot>
         </div>
 
         <div class="collapse" v-if="formHeight.substr(0,formHeight.length - 2) > 180" @click="collapseChange">
-            <i v-if="!collapse" class="el-icon-arrow-down"></i>
-            <i v-else class="el-icon-arrow-up"></i>
+            <i :class="`el-icon-arrow-${!collapse ? 'down' : 'up'}`"></i>
         </div>
     </div>
 </template>
@@ -51,11 +50,16 @@ export default {
     padding: 20px 5px 25px;
     height: auto;
     overflow: hidden;
+    transition: all 3s linear;
     &:hover {
         .collapse {
             color: #313131;
             border-color: #303030;
         }
+    }
+    &.unexpand {
+        max-height: 180px;
+        transition: all 3s linear;
     }
 
     .el-form-item__content {

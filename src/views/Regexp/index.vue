@@ -47,9 +47,7 @@ export default {
     created() {
         this.setOpts()
     },
-    mounted() {
-        
-    },
+    mounted() { },
     directives: {
         validate(el, binding) {
             let { integer = 16, decimal = 2, negative = false, max = Number.MAX_SAFE_INTEGER, min = 0, fillin = false } = binding.value
@@ -189,9 +187,11 @@ export default {
             function compare(param, value) {
                 let result = value
                 if (!isNull(param.max) && compareMax(value, param.max)) {
-                    if (param.compareLength)
+                    if (param.compareLength) {
                         result = generateValue(value, param.max)
-                    else result = param.max
+                    } else {
+                        result = param.max
+                    }
                 } else if (!isNull(param.min) && compareMin(value, param.min)) {
                     result = param.min
                 }
