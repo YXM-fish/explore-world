@@ -2,7 +2,7 @@
     <el-container>
         <el-header class="header-nav"></el-header>
         <el-container>
-            <el-aside class="side-bar">
+            <el-aside class="side-bar" style="width: auto;">
                 <el-menu
                     text-color="#ffffff"
                     active-text-color="#ffffff"
@@ -66,9 +66,6 @@ export default {
 .el-main {
     background-color: #f5f6f8;
     padding: 30px 26px;
-    div:first-child {
-        background-color: white;
-    }
 }
 .header-nav {
     background-color: #3486a3;

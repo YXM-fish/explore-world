@@ -8,12 +8,16 @@
 export default {}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .route-container {
     flex: 1;
     display: flex;
     overflow-y: auto;
     overflow-x: auto;
-    background-color: #f5f6f8;
+    background-color: #fff;
+    div:first-child:not(.route-container) {
+        flex: 1;
+        padding: 24px;
+    }
 }
 </style>

@@ -107,7 +107,7 @@
             </el-form>
         </page-top-form>
 
-        <el-table :data="tableData" :span-method="objectSpanMethod" border style="width: 100%; margin-top: 20px">
+        <el-table :data="tableData" :span-method="objectSpanMethod" :border="false" style="width: 100%; margin-top: 20px">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="index" width="50"></el-table-column>
             <el-table-column prop="id" label="ID" width="180"></el-table-column>
@@ -119,9 +119,20 @@
                 <el-table-column prop="amount2" align="center" label="数值 2（元）"></el-table-column>
                 <el-table-column prop="amount3" align="center" label="数值 3（元）"></el-table-column>
             </el-table-column>
+            <el-table-column align="center">
+                <el-tooltip class="item" effect="dark" content="编辑" placement="top">
+                    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="查看" placement="top">
+                    <el-button type="info" icon="el-icon-view" circle></el-button>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="删除" placement="top">
+                    <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                </el-tooltip>
+            </el-table-column>
         </el-table>
 
-        <el-table ref="tb1" :data="tableData1" style="width: 100%" row-key="id" border lazy @selection-change="handleSelectionChange" :load="load" :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+        <el-table ref="tb1" :data="tableData1" style="width: 100%" row-key="id" lazy @selection-change="handleSelectionChange" :load="load" :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="date" label="日期" width="380">
                 <template slot-scope="scope">

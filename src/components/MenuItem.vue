@@ -3,7 +3,7 @@
         <el-submenu :index="menu.path" v-if="menu.children && menu.children.length">
             <template slot="title">
                 <i :class="menu.meta.icon"></i>
-                <span>{{ menu.meta.title }}</span>
+                <span slot="title">{{ menu.meta.title }}</span>
             </template>
             <template v-for="(child, index) in menu.children">
                 <MenuItem :key="index" :menu="child"></MenuItem>
@@ -11,7 +11,7 @@
         </el-submenu>
         <el-menu-item :index="menu.path" :route="menu" v-else>
             <i :class="menu.meta.icon"></i>
-            <span>{{ menu.meta.title }}</span>
+            <span slot="title">{{ menu.meta.title }}</span>
         </el-menu-item>
     </div>
 </template>
@@ -42,6 +42,9 @@ export default {
     background-color: #5597ab;
 }
 .el-menu-item:hover {
-    background: #7aa4b1;
+    background-color: #7aa4b1;
+}
+/deep/ .el-submenu__title:hover {
+    background-color: #7aa4b1;
 }
 </style>
